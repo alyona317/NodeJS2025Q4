@@ -2,9 +2,11 @@ import {
   readFile as fsReadFile,
   mkdir,
   rename as fsRename, writeFile,
+  unlink
 } from "fs/promises";
 import path from 'path';
 import { getCurrentDirectory } from './navigation.js';
+import { copyFile } from './streams.js';
 
 export async function readFile(fileName) {
   try {
@@ -42,4 +44,18 @@ export async function renameFile(oldName, newName){
   } catch (err){
     throw new Error('Operation failed');
   }
+}
+
+export async function deleteFile(filePath) {
+  try {
+    const fullPath = path.resolve(getCurrentDirectory(), filePath);
+    await unlink(fullPath);
+  } catch (error) {
+    throw new Error("Operation failed");
+  }
+}
+
+export async function moveFile(sourcePath, destPath) {
+  await copyFile(sourcePath, destPath);
+  await deleteFile(sourcePath);
 }

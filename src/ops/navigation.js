@@ -1,5 +1,4 @@
 import { readdir, stat } from "fs/promises";
-import { statSync } from "fs";
 import path from "path";
 import { cwd, chdir } from "process";
 

@@ -1,6 +1,13 @@
 import { goUp, changeDir, listDirectory} from "./ops/navigation.js";
-import {readFile, createDirectory, createFile, renameFile } from "./ops/fsOps.js";
-import { copyFile, moveFile, deleteFile } from "./ops/streams.js";
+import {
+  readFile,
+  createDirectory,
+  createFile,
+  renameFile,
+  deleteFile,
+  moveFile
+} from "./ops/fsOps.js";
+import { copyFile} from "./ops/streams.js";
 import { calculateHash } from "./ops/hashing.js";
 
 
@@ -41,6 +48,15 @@ try {
       await copyFile(args[0], args[1]);
       break;
 
+    case "mv":
+      if (args.length < 2) throw new Error("Invalid input");
+      await moveFile(args[0], args[1]);
+      break;
+
+    case "rm":
+      if (!args[0]) throw new Error("Invalid input");
+      await deleteFile(args[0]);
+      break;
 
     case "hash":
       if (!args[0]) throw new Error("Invalid input");
