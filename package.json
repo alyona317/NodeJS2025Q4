@@ -1,0 +1,29 @@
+{
+  "name": "nodejs2025q4",
+  "version": "1.0.0",
+  "description": "This repository is the part of nodejs-course",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=24.10.0",
+    "npm": ">=10.9.2"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alyona317/NodeJS2025Q4.git"
+  },
+  
+  "keywords": [
+    "nodejs"
+  ],
+  "author": "alyona317",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alyona317/NodeJS2025Q4/issues"
+  },
+  "homepage": "https://github.com/alyona317/NodeJS2025Q4#readme"
+}
