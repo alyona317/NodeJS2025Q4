@@ -1,5 +1,6 @@
 import readline from "readline";
-// import handleCommand from "./commands.js";
+import {handleCommand }from "./commands.js";
+import { showCurrentDirectory } from './ops/navigation.js';
 
 let username = '';
 
@@ -12,6 +13,7 @@ export function getUsername() {
 
 function welcomeUser(){
   console.log(`Welcome to the File Manager, ${username}!`);
+  showCurrentDirectory();
 }
 function displayGoodbye(){
   console.log(`Thank you for using File Manager, ${username}, goodbye!`);
@@ -27,13 +29,14 @@ function initFileManager(){
     const command = line.trim();
 
     if (command === '.exit' ){
-      displayGoodbye();
+
       rl.close();
+      return
     }
-    // await handleCommand(command){
-    //   showCurrentDirectory();
-    //   rl.prompt();
-    // }
+    await handleCommand(command)
+      showCurrentDirectory();
+      rl.prompt();
+    
   });
   rl.on('close', () => {
     displayGoodbye()
