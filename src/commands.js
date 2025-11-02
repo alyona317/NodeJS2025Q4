@@ -1,5 +1,7 @@
 import { goUp, changeDir, listDirectory} from "./ops/navigation.js";
 import {readFile, createDirectory, createFile, renameFile } from "./ops/fsOps.js";
+import { copyFile, moveFile, deleteFile } from "./ops/streams.js";
+import { calculateHash } from "./ops/hashing.js";
 
 
 export async function handleCommand (input){
@@ -35,6 +37,10 @@ try {
       break;
 
 
+    case "hash":
+      if (!args[0]) throw new Error("Invalid input");
+      await calculateHash(args[0]);
+      break;
 
     case "mkdir":
       if (!args[0]) throw new Error("Invalid input");
