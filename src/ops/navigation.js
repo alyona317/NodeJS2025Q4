@@ -1,4 +1,4 @@
-import { readdir } from "fs/promises";
+import { readdir, stat } from "fs/promises";
 import { statSync } from "fs";
 import path from "path";
 import { cwd, chdir } from "process";
@@ -49,7 +49,7 @@ export async function listDirectory() {
 
     for (const item of items) {
       const itemPath = path.join(currentDir, item);
-      const stats = statSync(itemPath);
+      const stats = await stat(itemPath);
       itemsWithStats.push({
         name: item,
         isDirectory: stats.isDirectory(),

@@ -3,6 +3,7 @@ import {readFile, createDirectory, createFile, renameFile } from "./ops/fsOps.js
 import { copyFile, moveFile, deleteFile } from "./ops/streams.js";
 import { calculateHash } from "./ops/hashing.js";
 
+
 export async function handleCommand (input){
 const [command, ...args] = input.split(" ");
 try {
