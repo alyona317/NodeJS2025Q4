@@ -3,7 +3,6 @@ import {readFile, createDirectory, createFile, renameFile } from "./ops/fsOps.js
 import { copyFile, moveFile, deleteFile } from "./ops/streams.js";
 import { calculateHash } from "./ops/hashing.js";
 
-
 export async function handleCommand (input){
 const [command, ...args] = input.split(" ");
 try {
@@ -34,6 +33,11 @@ try {
     case "rn":
       if (args.length < 2) throw new Error("Invalid input");
       await renameFile(args[0], args[1]);
+      break;
+
+    case "cp":
+      if (args.length < 2) throw new Error("Invalid input");
+      await copyFile(args[0], args[1]);
       break;
 
 
