@@ -1,9 +1,11 @@
 import { IncomingMessage, ServerResponse } from 'http';
-import { getUser } from './routes/getUser.ts';
+import { getUsers } from './routes/getUsers.ts';
 import { postUser } from './routes/postUser.ts';
+import { getUserById } from './routes/getUserById.ts'
 
 export function handleRequest(req: IncomingMessage, res: ServerResponse) {
-  const { url, method } = req;
+  const url = req.url ?? '';
+  const method = req.method ?? '';
 
  if (method === 'OPTIONS') {
    res.writeHead(200, {
@@ -18,7 +20,11 @@ export function handleRequest(req: IncomingMessage, res: ServerResponse) {
  res.setHeader('Access-Control-Allow-Origin', '*');
 
   if (url === '/api/users' && method === 'GET') {
-    return getUser(req, res);
+    return getUsers(req, res);
+  }
+  if (url.startsWith('/api/users/') && method === 'GET') {
+    const userId = url.split('/')[3];
+    return getUserById(req, res, userId);
   }
   if (url === '/api/users' && method === 'POST') {
     return postUser(req, res);

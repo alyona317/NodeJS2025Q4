@@ -47,7 +47,8 @@ export async function postUser(req: IncomingMessage, res: ServerResponse) {
     res.writeHead(201, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(newUser));
   } catch (err) {
-    res.writeHead(400, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ message: (err as Error).message }));
+      res.statusCode = 500; 
+      res.setHeader('Content-Type', 'text/plain');
+      res.end((err as Error).message);
   }
 }
