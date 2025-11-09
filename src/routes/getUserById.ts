@@ -1,5 +1,5 @@
-import { users } from "../data.ts";
-import { IncomingMessage, ServerResponse } from "http";
+import { users } from '../data.ts';
+import { IncomingMessage, ServerResponse } from 'http';
 import { validate as isUuid } from 'uuid';
 
 export function getUserById(req: IncomingMessage, res: ServerResponse, userId: string) {

@@ -1,28 +1,40 @@
+// eslint.config.js
 import js from '@eslint/js';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
-import { defineConfig } from 'eslint/config';
 
-export default defineConfig([
+export default tseslint.config(
   {
+
     files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
-    plugins: { '@typescript-eslint': tseslint.plugin },
-    extends: ['js/recommended', ...tseslint.configs.recommended],
+    extends: [js.configs.recommended, ...tseslint.configs.recommended],
     languageOptions: {
-      parser: tseslint.parser,
+      globals: {
+        ...globals.node,
+        ...globals.es2022,
+      },
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
       },
-      globals: globals.node,
     },
     rules: {
       semi: ['error', 'always'],
       quotes: ['error', 'single'],
+      indent: ['error', 2],
+      'comma-dangle': ['error', 'always-multiline'],
+      'object-curly-spacing': ['error', 'always'],
     },
   },
   {
+
     files: ['**/*.js'],
-    languageOptions: { sourceType: 'commonjs' },
+    languageOptions: {
+      sourceType: 'commonjs',
+    },
   },
-]);
+  {
+
+    ignores: ['dist/**', 'node_modules/**', 'coverage/**', '*.config.js'],
+  },
+);

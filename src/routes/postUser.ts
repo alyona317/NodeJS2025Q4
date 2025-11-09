@@ -17,13 +17,13 @@ export function getRequestBody(req: IncomingMessage): Promise<NewUser> {
           typeof parsed.username !== 'string' ||
           typeof parsed.age !== 'number' ||
           !Array.isArray(parsed.hobbies) ||
-          !parsed.hobbies.every((hobby: any) => typeof hobby === 'string')
+          !parsed.hobbies.every((hobby: unknown) => typeof hobby === 'string')
         ) {
           reject(new Error('Invalid user data'));
           return;
         }
         resolve(parsed as NewUser);
-      } catch (err) {
+      } catch {
         reject(new Error('Invalid JSON'));
       }
     });
@@ -47,18 +47,18 @@ export async function postUser(req: IncomingMessage, res: ServerResponse) {
     res.writeHead(201, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(newUser));
   } catch (err) {
-      const errorMessage = (err as Error).message;
+    const errorMessage = (err as Error).message;
 
-      if (
-        errorMessage === 'Invalid user data' ||
+    if (
+      errorMessage === 'Invalid user data' ||
         errorMessage === 'Invalid JSON'
-      ) {
-        res.statusCode = 400; 
-      } else {
-        res.statusCode = 500; 
-      }
+    ) {
+      res.statusCode = 400; 
+    } else {
+      res.statusCode = 500; 
+    }
 
-      res.setHeader('Content-Type', 'text/plain');
-      res.end((err as Error).message);
+    res.setHeader('Content-Type', 'text/plain');
+    res.end((err as Error).message);
   }
 }

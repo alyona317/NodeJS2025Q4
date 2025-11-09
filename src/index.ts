@@ -1,4 +1,3 @@
-import { config } from 'dotenv';
 import { createServer } from 'http';
 import { handleRequest } from './server.ts';
 import dotenv from 'dotenv';
