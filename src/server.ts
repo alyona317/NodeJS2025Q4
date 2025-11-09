@@ -3,6 +3,7 @@ import { getUsers } from './routes/getUsers.ts';
 import { postUser } from './routes/postUser.ts';
 import { getUserById } from './routes/getUserById.ts';
 import { deleteUser } from './routes/deleteUser.ts';
+import { putUser } from './routes/putUser.ts';
 
 export function handleRequest(req: IncomingMessage, res: ServerResponse) {
   const url = req.url ?? '';
@@ -29,6 +30,10 @@ export function handleRequest(req: IncomingMessage, res: ServerResponse) {
   }
   if (url === '/api/users' && method === 'POST') {
     return postUser(req, res);
+  }
+  if (url === '/api/users/' && method === 'PUT') {
+  const userId = url.split('/')[3];
+  return putUser(req, res, userId);
   }
   if (url.startsWith('/api/users/') && method === 'DELETE') {
     return deleteUser(req, res);
