@@ -29,7 +29,7 @@
     "lint": "eslint src --ext .ts,.js",
     "lint:fix": "eslint src --ext .ts,.js --fix",
     "build": "tsc && esbuild src/index.ts --bundle --platform=node --outdir=dist",
-    "dev": "cross-env NODE_ENV=development ts-node-dev --respawn --transpile-only src/index.ts",
+    "dev": "cross-env NODE_ENV=development node --loader ts-node/esm src/index.ts",
     "format": "prettier --write src/",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
