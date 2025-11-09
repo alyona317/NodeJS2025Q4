@@ -32,8 +32,8 @@ export function handleRequest(req: IncomingMessage, res: ServerResponse) {
     return postUser(req, res);
   }
   if (url === '/api/users/' && method === 'PUT') {
-  const userId = url.split('/')[3];
-  return putUser(req, res, userId);
+    const userId = url.split('/')[3];
+    return putUser(req, res, userId);
   }
   if (url.startsWith('/api/users/') && method === 'DELETE') {
     return deleteUser(req, res);
