@@ -47,7 +47,17 @@ export async function postUser(req: IncomingMessage, res: ServerResponse) {
     res.writeHead(201, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(newUser));
   } catch (err) {
-      res.statusCode = 500; 
+      const errorMessage = (err as Error).message;
+
+      if (
+        errorMessage === 'Invalid user data' ||
+        errorMessage === 'Invalid JSON'
+      ) {
+        res.statusCode = 400; 
+      } else {
+        res.statusCode = 500; 
+      }
+
       res.setHeader('Content-Type', 'text/plain');
       res.end((err as Error).message);
   }

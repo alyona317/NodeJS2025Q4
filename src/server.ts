@@ -2,6 +2,7 @@ import { IncomingMessage, ServerResponse } from 'http';
 import { getUsers } from './routes/getUsers.ts';
 import { postUser } from './routes/postUser.ts';
 import { getUserById } from './routes/getUserById.ts'
+import { deleteUser } from './routes/deleteUser.ts';
 
 export function handleRequest(req: IncomingMessage, res: ServerResponse) {
   const url = req.url ?? '';
@@ -29,6 +30,10 @@ export function handleRequest(req: IncomingMessage, res: ServerResponse) {
   if (url === '/api/users' && method === 'POST') {
     return postUser(req, res);
   }
+  if (url.startsWith('/api/users/') && method === 'DELETE') {
+    return deleteUser(req, res);
+  }
+
   res.writeHead(404, { 'Content-Type': 'application/json' });
   res.end('Not Found');
 }
